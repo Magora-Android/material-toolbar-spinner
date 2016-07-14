@@ -61,10 +61,13 @@ public class MainActivity extends AppCompatActivity {
         spinnerAdapter.addItems(getUserGroupList());
 
         Spinner spinner = (Spinner) spinnerContainer.findViewById(R.id.toolbar_spinner);
-        int dropDownVerticalOffset = getResources().getDimensionPixelSize(R.dimen.dropdown_vertical_offset);
+        int dropDownVerticalOffset;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            spinner.setDropDownVerticalOffset(-dropDownVerticalOffset);
+            dropDownVerticalOffset = getResources().getDimensionPixelSize(R.dimen.dropdown_vertical_offset_pre_lollipop);
+        } else {
+            dropDownVerticalOffset = getResources().getDimensionPixelSize(R.dimen.dropdown_vertical_offset_post_lollipop);
         }
+        spinner.setDropDownVerticalOffset(dropDownVerticalOffset);
         spinner.setAdapter(spinnerAdapter);
 
         /*Spinner mySpinner = (Spinner) findViewById(R.id.my_spinner);
