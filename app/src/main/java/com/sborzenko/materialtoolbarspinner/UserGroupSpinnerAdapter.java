@@ -1,6 +1,7 @@
 package com.sborzenko.materialtoolbarspinner;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,36 +17,27 @@ import java.util.List;
  * @author Stanislav S. Borzenko
  */
 public class UserGroupSpinnerAdapter extends BaseAdapter {
-    private List<UserGroup> mItems = new ArrayList<>();
+    private List<UserGroup> userGroupList = new ArrayList<>();
 
     private Context context;
-    private Context toolbarContext;
 
-    public UserGroupSpinnerAdapter(Context context, Context toolbarContext) {
+    public UserGroupSpinnerAdapter(Context context) {
         this.context = context;
-        this.toolbarContext = toolbarContext;
     }
 
-    public void clear() {
-        mItems.clear();
-    }
-
-    public void addItem(UserGroup userGroup) {
-        mItems.add(userGroup);
-    }
-
-    public void addItems(List<UserGroup> userGroupList) {
-        mItems.addAll(userGroupList);
+    public void setUserGroupList(List<UserGroup> userGroupList) {
+        this.userGroupList = userGroupList;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return mItems.size();
+        return userGroupList.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return mItems.get(position);
+    public UserGroup getItem(int position) {
+        return userGroupList.get(position);
     }
 
     @Override
@@ -54,34 +46,61 @@ public class UserGroupSpinnerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getDropDownView(int position, View view, ViewGroup parent) {
-        if (view == null || !view.getTag().toString().equals("DROPDOWN")) {
-            view = LayoutInflater.from(toolbarContext)
-                    .inflate(R.layout.toolbar_spinner_item_dropdown, parent, false);
-            view.setTag("DROPDOWN");
+    public View getDropDownView(int position,
+                                View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(
+                    R.layout.toolbar_spinner_item_dropdown, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.text = (TextView) convertView
+                    .findViewById(R.id.text);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TextView textView = (TextView) view.findViewById(android.R.id.text1);
-        textView.setText(getTitle(position));
+        UserGroup userGroup = getItem(position);
+        viewHolder.text.setText(userGroup.getName());
 
-        return view;
+        return convertView;
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        if (view == null || !view.getTag().toString().equals("NON_DROPDOWN")) {
-            view = LayoutInflater.from(context)
-                    .inflate(R.layout.toolbar_spinner_item_actionbar, parent, false);
-            view.setTag("NON_DROPDOWN");
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(
+                    R.layout.toolbar_spinner_item_actionbar, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.text = (TextView) convertView
+                    .findViewById(R.id.text);
+            setTriangleAtEnd(viewHolder.text);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        TextView textView = (TextView) view.findViewById(android.R.id.text1);
-        textView.setText(getTitle(position));
+        UserGroup userGroup = getItem(position);
+        viewHolder.text.setText(userGroup.getName());
 
-        return view;
+        return convertView;
     }
 
-    private String getTitle(int position) {
-        return position >= 0 && position < mItems.size() ? mItems.get(position).getName() : "";
+    private void setTriangleAtEnd(TextView textView) {
+        Drawable triangleDrawable
+                = AndroidUtils.getTintDrawableByThemeAttr(context,
+                R.drawable.spinner_triangle, R.attr.toolbarElementsColor);
+        textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                triangleDrawable, null);
+
+        int spinnerTrianglePadding
+                = context.getResources().getDimensionPixelSize(
+                R.dimen.toolbar_spinner_triangle_padding);
+        textView.setCompoundDrawablePadding(spinnerTrianglePadding);
+    }
+
+    static class ViewHolder {
+        TextView text;
     }
 }

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@android:id/text1"
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:drawablePadding="8dp"
@@ -15,5 +15,5 @@
         android:paddingRight="16dp"
         android:textColor="#ff333333"
         android:textSize="16sp"
-        tools:text="Hello" />
+        tools:text="Sample Text" />
 </LinearLayout>

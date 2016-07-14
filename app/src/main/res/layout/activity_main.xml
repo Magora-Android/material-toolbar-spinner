@@ -5,24 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
+    
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.SpinExam.ActionBar"/>
+        android:theme="@style/ThemeOverlay.SpinExam.ActionBar">
 
-    <FrameLayout
-        android:id="@+id/frame"
+        <Spinner
+            android:id="@+id/toolbar_spinner"
+            style="@style/Widget.SpinExam.Spinner.Toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_user_group"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#3300ff00">
-
-    </FrameLayout>
-
-    <Spinner
-        android:id="@+id/my_spinner"
-        style="@style/Widget.SpinExam.Spinner.Toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="30sp"
+        tools:text="Sample Text" />
 </LinearLayout>
