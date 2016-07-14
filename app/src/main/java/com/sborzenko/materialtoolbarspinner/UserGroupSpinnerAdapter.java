@@ -2,6 +2,7 @@ package com.sborzenko.materialtoolbarspinner;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ public class UserGroupSpinnerAdapter extends BaseAdapter {
     private List<UserGroup> userGroupList = new ArrayList<>();
 
     private Context context;
+    private int itemWidth;
 
-    public UserGroupSpinnerAdapter(Context context) {
+    public UserGroupSpinnerAdapter(Context context, int itemWidth) {
         this.context = context;
+        this.itemWidth = itemWidth;
     }
 
     public void setUserGroupList(List<UserGroup> userGroupList) {
@@ -52,9 +55,13 @@ public class UserGroupSpinnerAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.toolbar_spinner_item_dropdown, parent, false);
+            AndroidUtils.setViewWidth(convertView, itemWidth);
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView
                     .findViewById(R.id.text);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                viewHolder.text.setBackgroundResource(AndroidUtils.getSelectableItemBackground(context));
+            }
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -72,6 +79,7 @@ public class UserGroupSpinnerAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.toolbar_spinner_item_actionbar, parent, false);
+            AndroidUtils.setViewWidth(convertView, itemWidth);
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView
                     .findViewById(R.id.text);

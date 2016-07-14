@@ -120,6 +120,16 @@ public class AndroidUtils {
         return getTintDrawableByColor2(context, drawableResId, color);
     }
 
+    @DrawableRes
+    public static int getSelectableItemBackground(Context context) {
+        int[] attrs = new int[]{R.attr.selectableItemBackground};
+        TypedArray typedArray = context.obtainStyledAttributes(attrs);
+        int backgroundResource = typedArray.getResourceId(0, 0);
+        typedArray.recycle();
+
+        return backgroundResource;
+    }
+
     public static int getStatusBarHeight(Context context) {
         int resource = context.getResources()
                 .getIdentifier("status_bar_height", "dimen", "android");
@@ -142,6 +152,12 @@ public class AndroidUtils {
         ViewGroup.MarginLayoutParams layoutParams =
                 (ViewGroup.MarginLayoutParams) view.getLayoutParams();
         MarginLayoutParamsCompat.setMarginEnd(layoutParams, marginEnd);
+        view.setLayoutParams(layoutParams);
+    }
+
+    public static void setViewWidth(View view, int width) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = width;
         view.setLayoutParams(layoutParams);
     }
 }

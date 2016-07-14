@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:background="#cccccc">
@@ -14,6 +14,6 @@
         android:paddingLeft="@dimen/toolbar_spinner_padding_start"
         android:paddingRight="@dimen/toolbar_spinner_padding_end"
         android:paddingStart="@dimen/toolbar_spinner_padding_start"
-        android:textAppearance="@style/TextAppearance.SpinExam.ToolbarSpinner"
+        android:textAppearance="@style/TextAppearance.SpinExam.Spinner.Header"
         tools:text="Sample Text" />
 </LinearLayout>

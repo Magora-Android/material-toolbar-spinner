@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity
         }
         spinner.setDropDownVerticalOffset(dropDownVerticalOffset);
 
-        spinnerAdapter = new UserGroupSpinnerAdapter(this);
+        int width = getResources().getDimensionPixelSize(
+                R.dimen.toolbar_spinner_width);
+        spinnerAdapter = new UserGroupSpinnerAdapter(this, width);
         spinnerAdapter.setUserGroupList(getUserGroupList());
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);

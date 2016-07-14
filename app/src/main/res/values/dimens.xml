@@ -6,6 +6,10 @@
     <dimen name="dropdown_vertical_offset_pre_lollipop">-48dp</dimen>
     <dimen name="dropdown_vertical_offset_post_lollipop">8dp</dimen>
 
+    <dimen name="spinner_dropdown_item_height">48dp</dimen>
+    <dimen name="spinner_dropdown_item_padding_horizontal">16dp</dimen>
+
+    <dimen name="toolbar_spinner_width">200dp</dimen>
     <dimen name="toolbar_spinner_triangle_padding">8dp</dimen>
 
     <dimen name="toolbar_spinner_padding_start">16dp</dimen>
