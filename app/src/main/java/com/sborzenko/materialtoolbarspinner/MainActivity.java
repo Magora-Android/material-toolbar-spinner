@@ -1,7 +1,9 @@
 package com.sborzenko.materialtoolbarspinner;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -14,14 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.search);
+        initToolbar();
 
         final View spinnerContainer = LayoutInflater.from(this).inflate(R.layout.toolbar_spinner,
                 toolbar, false);
@@ -32,22 +34,29 @@ public class MainActivity extends AppCompatActivity {
 
 
         SearchView searchView
-                = (SearchView) toolbar.getMenu()
-                .findItem(R.id.action_search).getActionView();
+                = (SearchView) MenuItemCompat.getActionView(
+                toolbar.getMenu().findItem(R.id.action_search));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setQueryHint("Search");
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 spinnerContainer.setVisibility(View.GONE);
                 Toast.makeText(MainActivity.this, "search", Toast.LENGTH_SHORT).show();
+
+                toolbar.getMenu().findItem(R.id.action_like).setVisible(false);
             }
         });
+
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
                 spinnerContainer.setVisibility(View.VISIBLE);
                 Toast.makeText(MainActivity.this, "close search", Toast.LENGTH_SHORT).show();
+
+                toolbar.getMenu().findItem(R.id.action_like).setVisible(true);
+
                 return false;
             }
         });
@@ -74,6 +83,18 @@ public class MainActivity extends AppCompatActivity {
         UserGroupSpinnerAdapter mySpinnerAdapter = new UserGroupSpinnerAdapter(this);
         mySpinnerAdapter.addItems(getUserGroupList());
         mySpinner.setAdapter(mySpinnerAdapter);*/
+    }
+
+    private void initToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.search);
+
+        Drawable thumbUpDrawable
+                = AndroidUtils.getTintDrawableByThemeAttr(toolbar.getContext(),
+                R.drawable.ic_thumb_up, R.attr.colorControlNormal);
+
+        toolbar.getMenu().findItem(R.id.action_like)
+                .setIcon(thumbUpDrawable);
     }
 
     private List<UserGroup> getUserGroupList() {

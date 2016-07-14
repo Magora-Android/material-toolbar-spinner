@@ -19,6 +19,7 @@
     </style>
 
     <style name="ThemeOverlay.SpinExam.ActionBar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorControlNormal">@android:color/white</item>
         <item name="android:colorBackground">@color/background_material_light</item>
     </style>
 </resources>

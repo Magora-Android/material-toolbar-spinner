@@ -8,4 +8,10 @@
         android:title="Search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_like"
+        android:icon="@drawable/ic_thumb_up"
+        android:title="Like"
+        app:showAsAction="always" />
 </menu>
