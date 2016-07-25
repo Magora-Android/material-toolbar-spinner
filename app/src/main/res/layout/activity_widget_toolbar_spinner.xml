@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".WidgetToolbarSpinnerActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.SpinExam.ActionBar">
+        android:theme="@style/ThemeOverlay.SpinExam.Toolbar">
 
         <com.magorasystems.materialtoolbarspinner.MaterialToolbarSpinner
             android:id="@+id/mt_spinner"

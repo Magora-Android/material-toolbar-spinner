@@ -1,8 +1,11 @@
 package com.sborzenko.materialtoolbarspinner;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,8 +23,12 @@ import java.util.List;
  * @author Stanislav S. Borzenko
  */
 public class WidgetToolbarSpinnerActivity extends AppCompatActivity
-        implements AdapterView.OnItemSelectedListener {
+        implements AdapterView.OnItemSelectedListener,
+        View.OnClickListener,
+        SearchView.OnCloseListener {
     private Toolbar toolbar;
+
+    private MaterialToolbarSpinner spinner;
 
     private TextView userGroupTextView;
 
@@ -32,11 +39,11 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_widget_toolbar_spinner);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        initToolbar();
+        initSpinner();
+        initSearchView();
 
         userGroupTextView = (TextView) findViewById(R.id.tv_user_group);
-
-        initSpinner();
     }
 
     // region AdapterView.OnItemSelectedListener (Spinner item selected)
@@ -54,12 +61,55 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
     }
     // endregion
 
+    // region View.OnClickListener
+    @Override
+    public void onClick(View view) {
+        spinner.setVisibility(View.GONE);
+        Toast.makeText(WidgetToolbarSpinnerActivity.this, "Open search",
+                Toast.LENGTH_SHORT).show();
+
+        toolbar.getMenu().findItem(R.id.action_like).setVisible(false);
+    }
+    // endregion
+
+    // region SearchView.OnCloseListener
+    @Override
+    public boolean onClose() {
+        spinner.setVisibility(View.VISIBLE);
+        Toast.makeText(WidgetToolbarSpinnerActivity.this, "Close search",
+                Toast.LENGTH_SHORT).show();
+
+        toolbar.getMenu().findItem(R.id.action_like).setVisible(true);
+
+        return false;
+    }
+    // endregion
+
+    private void initSearchView() {
+        SearchView searchView
+                = (SearchView) MenuItemCompat.getActionView(
+                toolbar.getMenu().findItem(R.id.action_search));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search");
+        searchView.setOnSearchClickListener(this);
+        searchView.setOnCloseListener(this);
+    }
+
+    private void initToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.search);
+        Drawable thumbUpDrawable
+                = AndroidUtils.getTintDrawableByThemeAttr(toolbar.getContext(),
+                R.drawable.ic_thumb_up, R.attr.colorControlNormal);
+
+        toolbar.getMenu().findItem(R.id.action_like)
+                .setIcon(thumbUpDrawable);
+    }
+
     private void initSpinner() {
-        MaterialToolbarSpinner spinner = (MaterialToolbarSpinner)
+        spinner = (MaterialToolbarSpinner)
                 toolbar.findViewById(R.id.mt_spinner);
 
-        int width = getResources().getDimensionPixelSize(
-                R.dimen.toolbar_spinner_width);
         spinnerAdapter = new UserGroupToolbarSpinnerAdapter(this);
         spinnerAdapter.setUserGroupList(getUserGroupList());
         spinner.setAdapter(spinnerAdapter);

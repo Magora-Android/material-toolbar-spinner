@@ -1,12 +1,9 @@
 <resources>
-    <attr name="toolbarElementsColor" format="color"/>
-
     <style name="SpinExam" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="toolbarElementsColor">@color/colorAccent</item>
         <item name="toolbarStyle">@style/Widget.SpinExam.Toolbar</item>
         <item name="toolbarSpinnerStyle">@style/Widget.MTS.Spinner.Toolbar</item>
     </style>
@@ -15,16 +12,7 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
-    <style name="TextAppearance.SpinExam.Spinner.Header" parent="TextAppearance.AppCompat.Medium">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">?colorControlNormal</item>
-    </style>
-
-    <style name="TextAppearance.SpinExam.Spinner.Dropdown" parent="TextAppearance.AppCompat.Menu">
-    </style>
-
-    <style name="ThemeOverlay.SpinExam.ActionBar" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="colorControlNormal">#0cd4b3</item>
-        <item name="android:colorBackground">@color/background_material_light</item>
+    <style name="ThemeOverlay.SpinExam.Toolbar" parent="ThemeOverlay.MTS.Toolbar">
+        <item name="colorControlNormal">#fffb00</item>
     </style>
 </resources>

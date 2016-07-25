@@ -11,10 +11,13 @@
     <style name="Widget.MTS.Spinner.Toolbar" parent="Base.Widget.MTS.Spinner.Toolbar"/>
 
     <style name="ThemeOverlay.MTS.Toolbar" parent="ThemeOverlay.AppCompat.Dark">
-
-
-
-
-        <!--<item name="android:colorBackground">@color/background_material_light</item>-->
+        <item name="android:colorBackground">@color/background_material_light</item>
     </style>
+
+    <style name="TextAppearance.MTS.Spinner.Header" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?colorControlNormal</item>
+    </style>
+
+    <style name="TextAppearance.MTS.Spinner.Dropdown" parent="TextAppearance.AppCompat.Menu"/>
 </resources>
