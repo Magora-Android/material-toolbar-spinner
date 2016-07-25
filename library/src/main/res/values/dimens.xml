@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dropdown_vertical_offset_pre_lollipop">-48dp</dimen>
+    <dimen name="dropdown_vertical_offset_post_lollipop">8dp</dimen>
+
+    <dimen name="toolbar_spinner_width">50dp</dimen>
+</resources>

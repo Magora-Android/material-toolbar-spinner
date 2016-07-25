@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.MTS.Spinner.Toolbar" parent="Base.Widget.MTS.Spinner.Toolbar">
+        <item name="android:overlapAnchor">true</item>
+    </style>
+</resources>

@@ -1,5 +1,6 @@
 package com.sborzenko.materialtoolbarspinner;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +39,14 @@ public class MainActivity extends AppCompatActivity
         initSearchView();
 
         userGroupTextView = (TextView) findViewById(R.id.tv_user_group);
+
+        findViewById(R.id.btn_widget).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,
+                        WidgetToolbarSpinnerActivity.class));
+            }
+        });
     }
 
     private void initToolbar() {
@@ -56,14 +65,13 @@ public class MainActivity extends AppCompatActivity
         spinner = (Spinner) toolbar.findViewById(R.id.toolbar_spinner);
 
         int dropDownVerticalOffset;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            dropDownVerticalOffset = getResources().getDimensionPixelSize(
-                    R.dimen.dropdown_vertical_offset_pre_lollipop);
-        } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
             dropDownVerticalOffset = getResources().getDimensionPixelSize(
                     R.dimen.dropdown_vertical_offset_post_lollipop);
+
+            spinner.setDropDownVerticalOffset(dropDownVerticalOffset);
         }
-        spinner.setDropDownVerticalOffset(dropDownVerticalOffset);
 
         int width = getResources().getDimensionPixelSize(
                 R.dimen.toolbar_spinner_width);

@@ -12,11 +12,10 @@
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.SpinExam.ActionBar">
 
-        <Spinner
-            android:id="@+id/toolbar_spinner"
-            style="@style/Widget.MTS.Spinner.Toolbar"
+        <com.magorasystems.materialtoolbarspinner.MaterialToolbarSpinner
+            android:id="@+id/mt_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -26,18 +25,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:text="Widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:id="@+id/tv_user_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="30sp"
             tools:text="Sample Text" />
-
-        <Button
-            android:id="@+id/btn_widget"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="Widget" />
     </LinearLayout>
 </LinearLayout>

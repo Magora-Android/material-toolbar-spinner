@@ -1,6 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.SpinExam.Spinner.Toolbar" parent="Base.Widget.SpinExam.Spinner.Toolbar">
-        <item name="android:overlapAnchor">true</item>
-    </style>
 </resources>
