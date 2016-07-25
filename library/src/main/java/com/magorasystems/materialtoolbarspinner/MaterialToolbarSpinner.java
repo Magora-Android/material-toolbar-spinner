@@ -41,7 +41,7 @@ public class MaterialToolbarSpinner extends LinearLayout {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int dropDownVerticalOffset = getResources().getDimensionPixelSize(
-                    R.dimen.dropdown_vertical_offset_post_lollipop);
+                    R.dimen.popup_dropdown_v_offset_ge_21);
             spinner.setDropDownVerticalOffset(dropDownVerticalOffset);
         }
 
@@ -74,14 +74,17 @@ public class MaterialToolbarSpinner extends LinearLayout {
 
                 LinearLayout itemContainer = (LinearLayout) LayoutInflater
                         .from(parent.getContext())
-                        .inflate(R.layout.item_toolbar, parent, false);
+                        .inflate(R.layout.item_wrapper_spinner_toolbar,
+                                parent, false);
                 itemContainer.addView(convertView, 0,
                         new LinearLayout.LayoutParams(
                                 ViewGroup.LayoutParams.WRAP_CONTENT,
                                 ViewGroup.LayoutParams.MATCH_PARENT));
 
-                int itemWidth = convertView.getContext().getResources().getDimensionPixelSize(
-                        R.dimen.toolbar_spinner_width);
+                // TODO: Understand logic. It doesn't work properly.
+                int itemWidth = convertView.getContext()
+                        .getResources().getDimensionPixelSize(
+                        R.dimen.item_toolbar_width);
                 AndroidUtils.setViewWidth(itemContainer, itemWidth);
 
                 view = itemContainer;
@@ -100,9 +103,13 @@ public class MaterialToolbarSpinner extends LinearLayout {
                                     View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = getDownView(position, null, parent);
-                int itemWidth = convertView.getContext().getResources().getDimensionPixelSize(
-                        R.dimen.toolbar_spinner_width);
+
+                // TODO: Understand logic. It doesn't work properly.
+                int itemWidth = convertView.getContext()
+                        .getResources().getDimensionPixelSize(
+                        R.dimen.item_toolbar_width);
                 AndroidUtils.setViewWidth(convertView, itemWidth);
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     convertView.setBackgroundResource(
                             AndroidUtils.getSelectableItemBackground(

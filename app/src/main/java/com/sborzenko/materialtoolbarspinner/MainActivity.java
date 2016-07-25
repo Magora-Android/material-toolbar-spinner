@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author Stanislav S. Borzenko
  */
-public class WidgetToolbarSpinnerActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener,
         View.OnClickListener,
         SearchView.OnCloseListener {
@@ -37,7 +37,7 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_widget_toolbar_spinner);
+        setContentView(R.layout.activity_main);
 
         initToolbar();
         initSpinner();
@@ -56,7 +56,7 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        Toast.makeText(WidgetToolbarSpinnerActivity.this,
+        Toast.makeText(MainActivity.this,
                 "Nothing is selected", Toast.LENGTH_SHORT).show();
     }
     // endregion
@@ -65,7 +65,7 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         spinner.setVisibility(View.GONE);
-        Toast.makeText(WidgetToolbarSpinnerActivity.this, "Open search",
+        Toast.makeText(MainActivity.this, "Open search",
                 Toast.LENGTH_SHORT).show();
 
         toolbar.getMenu().findItem(R.id.action_like).setVisible(false);
@@ -76,7 +76,7 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
     @Override
     public boolean onClose() {
         spinner.setVisibility(View.VISIBLE);
-        Toast.makeText(WidgetToolbarSpinnerActivity.this, "Close search",
+        Toast.makeText(MainActivity.this, "Close search",
                 Toast.LENGTH_SHORT).show();
 
         toolbar.getMenu().findItem(R.id.action_like).setVisible(true);
@@ -84,16 +84,6 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
         return false;
     }
     // endregion
-
-    private void initSearchView() {
-        SearchView searchView
-                = (SearchView) MenuItemCompat.getActionView(
-                toolbar.getMenu().findItem(R.id.action_search));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setQueryHint("Search");
-        searchView.setOnSearchClickListener(this);
-        searchView.setOnCloseListener(this);
-    }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -114,6 +104,16 @@ public class WidgetToolbarSpinnerActivity extends AppCompatActivity
         spinnerAdapter.setUserGroupList(getUserGroupList());
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
+    }
+
+    private void initSearchView() {
+        SearchView searchView
+                = (SearchView) MenuItemCompat.getActionView(
+                toolbar.getMenu().findItem(R.id.action_search));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search");
+        searchView.setOnSearchClickListener(this);
+        searchView.setOnCloseListener(this);
     }
 
     private List<UserGroup> getUserGroupList() {

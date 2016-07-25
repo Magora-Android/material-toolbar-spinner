@@ -51,7 +51,7 @@ public class UserGroupToolbarSpinnerAdapter extends MaterialToolbarSpinner.Adapt
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
-                    R.layout.toolbar_spinner_item_dropdown, parent, false);
+                    R.layout.item_mts_dropdown, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView
                     .findViewById(R.id.text);
@@ -71,7 +71,7 @@ public class UserGroupToolbarSpinnerAdapter extends MaterialToolbarSpinner.Adapt
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.toolbar_spinner_item_actionbar, parent, false);
+                    R.layout.item_mts_toolbar, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView
                     .findViewById(R.id.text);

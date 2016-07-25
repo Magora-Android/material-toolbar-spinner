@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dropdown_vertical_offset_pre_lollipop">-48dp</dimen>
-    <dimen name="dropdown_vertical_offset_post_lollipop">8dp</dimen>
+    <dimen name="popup_dropdown_v_offset_lt_21">-48dp</dimen>
+    <dimen name="popup_dropdown_v_offset_ge_21">8dp</dimen>
 
-    <dimen name="toolbar_spinner_width">50dp</dimen>
+    // TODO: Understand logic. It doesn't work properly.
+    <dimen name="item_toolbar_width">200dp</dimen>
+    <dimen name="item_toolbar_padding_start">16dp</dimen>
+    <dimen name="item_toolbar_triangle_margin">8dp</dimen>
+
+    <dimen name="item_dropdown_height">48dp</dimen>
+    <dimen name="item_dropdown_padding_horizontal">16dp</dimen>
 </resources>
