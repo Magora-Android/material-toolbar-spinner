@@ -1,6 +1,7 @@
 # Material Toolbar Spinner #
 
 ![mts_lollipop_example.gif](https://bitbucket.org/repo/RBaEEa/images/4248029282-mts_lollipop_example.gif)
+![mts_pre_lollipop_example.gif](https://bitbucket.org/repo/RBaEEa/images/3407211828-mts_pre_lollipop_example.gif)
 
 # Установка #
 ## Подключение репозитория ##
