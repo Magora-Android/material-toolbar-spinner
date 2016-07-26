@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.bmuschko.nexus'
 
 android {
     compileSdkVersion 24
@@ -8,8 +9,9 @@ android {
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -18,8 +20,41 @@ android {
     }
 }
 
+// region Upload to Nexus plugin configuration
+modifyPom {
+    project {
+        artifactId 'material-toolbar-spinner'
+        groupId 'com.magorasystems.android'
+        version android.defaultConfig.versionName
+        name 'Material Toolbar Spinner'
+        description 'Spinner view realization in Material style for Toolbar'
+        url 'https://bitbucket.org/mgrsys/material-toolbar-spinner'
+        inceptionYear '2016'
+
+        developers {
+            developer {
+                name 'Stanislav Borzenko'
+                email 'borzenko@magora.systems'
+            }
+        }
+
+        organization {
+            name "Magora Systems"
+            url "http://magora-systems.com/"
+        }
+    }
+}
+
+nexus {
+    sign = false
+    repositoryUrl = 'http://nexus.java.magora.team/content/repositories/releases/'
+    snapshotRepositoryUrl = 'http://nexus.java.magora.team/content/repositories/snapshots/'
+}
+// endregion
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.1.1'
+
+    testCompile 'junit:junit:4.12'
 }
