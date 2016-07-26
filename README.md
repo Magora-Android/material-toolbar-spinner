@@ -1,4 +1,5 @@
 # Material Toolbar Spinner #
+Небольшая обертка над Spinner'ом, позволяющая быстро добавить в Toolbar Spinner в Material-стиле одинаково выглядящий на разных версиях Android.
 
 ![mts_lollipop_example.gif](https://bitbucket.org/repo/RBaEEa/images/4248029282-mts_lollipop_example.gif)
 ![mts_pre_lollipop_example.gif](https://bitbucket.org/repo/RBaEEa/images/3407211828-mts_pre_lollipop_example.gif)
