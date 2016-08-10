@@ -7,8 +7,7 @@
 # Установка #
 ## Подключение репозитория ##
 В `build.gradle` уровня проекта необходимо добавить репозиторий Magora:
-```
-#!groovy
+```groovy
 allprojects {
     repositories {
         ...
@@ -25,15 +24,13 @@ allprojects {
 
 
 В файл `~/.gradle/gradle.properties` добавить соответствующие *properties* (логин и пароль нереальные и прописаны лишь для примера):
-```
-#!properties
+```ini
 magoraRepoUsername=balabol
 magoraRepoPassword=x88si!siQ05v
 ```
 
 ## Добавление зависимости ##
-```
-#!groovy
+```groovy
 dependencies {
     compile 'com.magorasystems.android:material-toolbar-spinner:1.0.0'
 }
@@ -42,8 +39,7 @@ dependencies {
 # Использование #
 
 В `Toolbar` необходимо добавить `MaterialToolbarSpinner` view:
-```
-#!xml
+```xml
 <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
@@ -60,8 +56,7 @@ dependencies {
 При этом на `Toolbar` необходимо проставить тему `ThemeOverlay.MTS.Toolbar`.  
 
 Кроме этого в теме приложения необходимо проставить атрибут `toolbarSpinnerStyle`:
-```
-#!xml
+```xml
 <style name="Theme.SampleApp" parent="Theme.AppCompat.Light.NoActionBar">
     ...
     <item name="toolbarSpinnerStyle">@style/Widget.MTS.Spinner.Toolbar</item>
@@ -69,8 +64,7 @@ dependencies {
 ```
 
 В коде же этот элемент используется как обычный Spinner:
-```
-#!java
+```java
 MaterialToolbarSpinner spinner = (MaterialToolbarSpinner) toolbar.findViewById(R.id.mts_model_name);
 ModelNameToolbarSpinnerAdapter spinnerAdapter = new ModelNameToolbarSpinnerAdapter(this);
 spinner.setAdapter(spinnerAdapter);
@@ -78,8 +72,7 @@ spinner.setOnItemSelectedListener(this);
 ```
 
 С той лишь оговоркой, что adapter должен наследоваться от класса `MaterialToolbarSpinner.Adapter` и методы для получения `View` для заголовочного элемента и выпадающего элемента имеют немного другое название:
-```
-#!java
+```java
 public class SampleToolbarSpinnerAdapter extends MaterialToolbarSpinner.Adapter {
     @Override
     public View getDownView(int position, View convertView, ViewGroup parent) {
@@ -94,52 +87,44 @@ public class SampleToolbarSpinnerAdapter extends MaterialToolbarSpinner.Adapter 
 ```
 
 При этом для простейшего случая можно использовать уже готовые layout'ы для item'ов:
-```
-#!java
+```java
 R.layout.item_mts_dropdown
 ```
 
-```
-#!java
+```java
 R.layout.item_mts_toolbar
 ```
 
 В случае использования своей разметки можно использовать следующие стили для текста:
-```
-#!xml
+```xml
 TextAppearance.MTS.Spinner.Dropdown
 ```
 
-```
-#!xml
+```xml
 TextAppearance.MTS.Spinner.Header
 ```
 
 ## Настройка темы ##
 
 Цвет треугольничка и текста в заголовке Spinner'а задается атрибутом `colorControlNormal` в теме `Toolbar`а.
-```
-#!xml
+```xml
 <style name="ThemeOverlay.SpinExam.Toolbar" parent="ThemeOverlay.MTS.Toolbar">
     <item name="colorControlNormal">#fffb00</item>
 </style>
 ```
 
 При этом цвет текста будет меняться этим атрибутом только при использовании следующего стиля для текста:
-```
-#!xml
+```xml
 TextAppearance.MTS.Spinner.Header
 ```
 
 который по умолчанию используется в разметке:
-```
-#!java
+```java
 R.layout.item_mts_toolbar
 ```
 которую можно использовать для заголовочного `View` при создании adapter'а (описано выше).
 
 При использовании своего стиля, цвет текста в нем удобнее проставить равным атрибуту `colorControlNormal`:
-```
-#!xml
+```xml
 <item name="android:textColor">?colorControlNormal</item>
 ```
