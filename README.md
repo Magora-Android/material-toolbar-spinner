@@ -1,44 +1,21 @@
 # Material Toolbar Spinner #
-Небольшая обертка над Spinner'ом, позволяющая быстро добавить в Toolbar Spinner в Material-стиле одинаково выглядящий на разных версиях Android.
+Small wrapper on Spinner, which let you easily add it to the Toolbar to look in material-style and equally on different Android versions
 
 ![mts_lollipop_example.gif](https://cloud.githubusercontent.com/assets/4465288/17552468/afe2e34c-5f32-11e6-9245-72d45ac4624f.gif)
 ![mts_pre_lollipop_example.gif](https://cloud.githubusercontent.com/assets/4465288/17552500/e5bada10-5f32-11e6-986c-f01266f307ec.gif)
 
-# Установка #
-## Подключение репозитория ##
-В `build.gradle` уровня проекта необходимо добавить репозиторий Magora:
-```groovy
-allprojects {
-    repositories {
-        ...
-        maven {
-            credentials {
-                username magoraRepoUsername
-                password magoraRepoPassword
-            }
-            url "http://nexus.java.magora.team/content/repositories/releases/"
-        }
-    }
-}		
-```
+# Setup #
 
-
-В файл `~/.gradle/gradle.properties` добавить соответствующие *properties* (логин и пароль нереальные и прописаны лишь для примера):
-```ini
-magoraRepoUsername=balabol
-magoraRepoPassword=x88si!siQ05v
-```
-
-## Добавление зависимости ##
+Add the following dependency to the `build.gradle` of the module:
 ```groovy
 dependencies {
     compile 'com.magorasystems.android:material-toolbar-spinner:1.0.0'
-}
+}		
 ```
 
-# Использование #
+# Usage #
 
-В `Toolbar` необходимо добавить `MaterialToolbarSpinner` view:
+It's needed to add `MaterialToolbarSpinner` view to the `Toolbar`:
 ```xml
 <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar"
@@ -53,9 +30,9 @@ dependencies {
 </android.support.v7.widget.Toolbar>
 ```
 
-При этом на `Toolbar` необходимо проставить тему `ThemeOverlay.MTS.Toolbar`.  
+And it's needed to set `ThemeOverlay.MTS.Toolbar` theme to the `Toolbar`.
 
-Кроме этого в теме приложения необходимо проставить атрибут `toolbarSpinnerStyle`:
+And beside that it's needed to set `toolbarSpinnerStyle` attribute in the Theme:
 ```xml
 <style name="Theme.SampleApp" parent="Theme.AppCompat.Light.NoActionBar">
     ...
@@ -63,7 +40,7 @@ dependencies {
 </style>
 ```
 
-В коде же этот элемент используется как обычный Spinner:
+In code this view is used almost as usual `Spinner`:
 ```java
 MaterialToolbarSpinner spinner = (MaterialToolbarSpinner) toolbar.findViewById(R.id.mts_model_name);
 ModelNameToolbarSpinnerAdapter spinnerAdapter = new ModelNameToolbarSpinnerAdapter(this);
@@ -71,7 +48,7 @@ spinner.setAdapter(spinnerAdapter);
 spinner.setOnItemSelectedListener(this);
 ```
 
-С той лишь оговоркой, что adapter должен наследоваться от класса `MaterialToolbarSpinner.Adapter` и методы для получения `View` для заголовочного элемента и выпадающего элемента имеют немного другое название:
+It's only needed to extend adapter from the `MaterialToolbarSpinner.Adapter`, that have little bit different names for methods that it's needed to implement to create views for header and for dropdown:
 ```java
 public class SampleToolbarSpinnerAdapter extends MaterialToolbarSpinner.Adapter {
     @Override
@@ -86,7 +63,7 @@ public class SampleToolbarSpinnerAdapter extends MaterialToolbarSpinner.Adapter 
 }
 ```
 
-При этом для простейшего случая можно использовать уже готовые layout'ы для item'ов:
+In simple case it's convenient to use ready layouts for items:
 ```java
 R.layout.item_mts_dropdown
 ```
@@ -95,7 +72,7 @@ R.layout.item_mts_dropdown
 R.layout.item_mts_toolbar
 ```
 
-В случае использования своей разметки можно использовать следующие стили для текста:
+In case of using custom layouts it's possible to use the following text styles:
 ```xml
 TextAppearance.MTS.Spinner.Dropdown
 ```
@@ -104,27 +81,27 @@ TextAppearance.MTS.Spinner.Dropdown
 TextAppearance.MTS.Spinner.Header
 ```
 
-## Настройка темы ##
+## Theme Customization ##
 
-Цвет треугольничка и текста в заголовке Spinner'а задается атрибутом `colorControlNormal` в теме `Toolbar`а.
+The color of the triangle and the text followed by the triangle are defined by `colorControlNormal` attribute of `Toolbar`'s theme:
 ```xml
 <style name="ThemeOverlay.SpinExam.Toolbar" parent="ThemeOverlay.MTS.Toolbar">
     <item name="colorControlNormal">#fffb00</item>
 </style>
 ```
 
-При этом цвет текста будет меняться этим атрибутом только при использовании следующего стиля для текста:
+And it's important to notice that color of the text will change only if the following style is used:
 ```xml
 TextAppearance.MTS.Spinner.Header
 ```
 
-который по умолчанию используется в разметке:
+This style is used in this layout by default:
 ```java
 R.layout.item_mts_toolbar
 ```
-которую можно использовать для заголовочного `View` при создании adapter'а (описано выше).
+which you can use for the header view when creating adapter (read above).
 
-При использовании своего стиля, цвет текста в нем удобнее проставить равным атрибуту `colorControlNormal`:
+If you use your own style for a text, it's convenient to set the color of a text to be equal to `colorControlNormal` attribute:
 ```xml
 <item name="android:textColor">?colorControlNormal</item>
 ```
