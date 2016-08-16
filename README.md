@@ -9,7 +9,7 @@ Small wrapper on Spinner, which let you easily add it to the Toolbar to look in 
 Add the following dependency to the `build.gradle` of the module:
 ```groovy
 dependencies {
-    compile 'com.magorasystems.android:material-toolbar-spinner:1.0.0'
+    compile 'com.magora-systems.android:material-toolbar-spinner:1.0.0'
 }		
 ```
 
